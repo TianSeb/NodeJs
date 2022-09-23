@@ -5,17 +5,16 @@ class Libro {
     getName() {
         return this._nombre
     }
+
+    getAuthor() {
+        return this._autor
+    }
 }
 
 class Usuario {
 
-    private _Libros:Libro[] 
-    private _Mascotas:string[]
-
-    constructor(private _nombre:string, private _apellido:string) {
-        this._Libros = []
-        this._Mascotas = []
-    }
+    constructor(private _nombre:string, private _apellido:string, 
+                private _Libros:Libro[] = [], private _Mascotas:string[] = []) {}
 
     getFullName() {
         return `${this._nombre} ${this._apellido}`
