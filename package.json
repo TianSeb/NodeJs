@@ -1,5 +1,5 @@
 {
-  "name": "ProgramacionBackend-Ejercicios",
+  "name": "NodeJs-Ejercicios",
   "version": "1.0.0",
   "description": "Ejercicios Sebastian Alasia",
   "main": "index.js",
@@ -11,15 +11,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TianSeb/ProgramacionBackend-Ejercicios.git"
+    "url": "git+https://github.com/TianSeb/NodeJs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TianSeb/ProgramacionBackend-Ejercicios/issues"
+    "url": "https://github.com/TianSeb/NodeJs.git/issues"
   },
-  "homepage": "https://github.com/TianSeb/ProgramacionBackend-Ejercicios#readme",
+  "homepage": "https://github.com/TianSeb/NodeJs.git#readme",
   "devDependencies": {
     "@types/express": "4.17.14",
     "@types/jest": "^29.0.3",
