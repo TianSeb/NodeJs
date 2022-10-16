@@ -1,3 +1,5 @@
+import Producto from "../model/Product"
+
 class Contenedor {
     fileName: string
     fs = require("fs")
@@ -32,7 +34,7 @@ class Contenedor {
         try {
             let container = await this.getDatabase()
             let objectFound = await this.objectExists(id)
-            return (objectFound < 0) ? new Error('Id not found') : container[objectFound]
+            return (objectFound < 0) ? 'Id not found' : container[objectFound]
         } catch (error) {
             throw new Error('Error')
         }
@@ -51,7 +53,7 @@ class Contenedor {
         try {
             let objectIndex = await this.objectExists(id)
             if(objectIndex < 0) { 
-                throw new Error('Id not found')
+                return 'Id not found'
             }
 
             let container = await this.getDatabase()
@@ -98,17 +100,6 @@ class Contenedor {
     private async saveProducts(data: Array<Producto>) {
         await this.fs.promises.writeFile(this.fileName, JSON.stringify(data,null,'\t'))
     }
-
 }
 
-class Producto {
-    constructor(public id:number = 0, private _title: string, 
-        private _price:number, private _url:string) {}
-
-        public get title(): string {
-            return this._title
-        }
-}
-
-
-export {Contenedor, Producto}
+export default Contenedor
