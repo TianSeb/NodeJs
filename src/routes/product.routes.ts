@@ -2,7 +2,8 @@ import { Router } from "express"
 import Contenedor from "../db/product.service"
 import Producto from "../model/Product"
 
-const dbRoute = 'C:/Users/Usuario1/Desktop/NodeJs/ProgramacionBackend-Ejercicios/src/db/Database'
+//'C:/Users/Usuario1/Desktop/NodeJs/ProgramacionBackend-Ejercicios/src/db/Database'
+const dbRoute = 'C:/Users/X1-CARBON/Desktop/backend/NodeJs/src/db/Database'
 const db = new Contenedor(dbRoute)
 
 const productsRoute = Router()
@@ -37,19 +38,12 @@ productsRoute.post('/',async (req,res) => {
 })
 
 productsRoute.put('/:id',async (req,res) => {
-    try {
-        let prodId = parseInt(req.params.id)
-        let product = await db.getById(prodId)
-        if(product) {
-
-        }
-        else {
-            return res.status(400).send("Product not found")
-        }
-
-    } catch (error) {
-        
-    }
+    let prodId = parseInt(req.params.id)
+    let {title, price, url} = req.body
+    let product = await db.updateProduct(new Producto(prodId,title,price,url),prodId)
+    return res.json({
+        data: product
+    })
 })
 
 productsRoute.delete('/:id',async (req,res) => {

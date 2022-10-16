@@ -24,10 +24,27 @@ class Contenedor {
 
                 container.push(obj)
                 await this.saveProducts(container)
-                console.log(`Product with id: ${container[container.length-1].id} has been saved`);
+                console.log(`Product with id: ${container[container.length-1].id} has been saved`)
             } catch (error) {
+                console.log(error)
                 throw new Error('Error')
             }
+    }
+
+    async updateProduct(product:Producto, id:number) {
+        try {
+            let objIndex = await this.objectExists(id)
+            if(objIndex < 0) return 'Object not found'
+    
+            let container = await this.getDatabase()
+            container[objIndex] = product
+            await this.saveProducts(container)
+            return `Object with id ${id} updated`
+
+        } catch (error) {
+            console.log(error)
+            throw new Error('Error')
+        }
     }
 
     async getById(id:number){
@@ -36,6 +53,7 @@ class Contenedor {
             let objectFound = await this.objectExists(id)
             return (objectFound < 0) ? 'Id not found' : container[objectFound]
         } catch (error) {
+            console.log(error)
             throw new Error('Error')
         }
     }
@@ -45,6 +63,7 @@ class Contenedor {
             let container = await this.getDatabase()
             return container
         } catch (error) {
+            console.log(error)
             throw new Error('Error')
         }
     }
@@ -55,13 +74,13 @@ class Contenedor {
             if(objectIndex < 0) { 
                 return 'Id not found'
             }
-
             let container = await this.getDatabase()
             container.splice(objectIndex,1)
             await this.saveProducts(container)
-
             console.log(`Object with id: ${id}, has been deleted`)
+
         } catch (error) {
+            console.log(error)
             throw new Error('Error')
         }
     }
@@ -71,6 +90,7 @@ class Contenedor {
             await this.saveProducts([])
             console.log('All objects had been removed');
         } catch (error) {
+            console.log(error)
             throw new Error('Error')
         }
     }
@@ -93,7 +113,8 @@ class Contenedor {
             }
             return container
         } catch (error) {
-            console.log(error);      
+            console.log(error)
+            throw new Error("DB error")      
         }
     }
 
