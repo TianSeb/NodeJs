@@ -1,38 +1,14 @@
 [
 	{
-		"id": 1,
-		"_title": "Mayonesa",
-		"_price": 200,
-		"_url": "www.elMorza.com"
+		"_title": "caca",
+		"_price": 250,
+		"_url": "www.ElMonza.com",
+		"_id": "3ae76464-0fe4-410b-a139-778c54f0acac"
 	},
 	{
-		"id": 2,
-		"_title": "mostaza",
-		"_price": 400,
-		"_url": "www.elMorza.com"
-	},
-	{
-		"id": 3,
 		"_title": "kechu",
 		"_price": 500,
-		"_url": "www.elMorza.com"
-	},
-	{
-		"id": 6,
-		"_title": "tierra",
-		"_price": 250,
-		"_url": "www.ElMonza.com"
-	},
-	{
-		"id": 7,
-		"_title": "tierra",
-		"_price": 250,
-		"_url": "www.ElMonza.com"
-	},
-	{
-		"id": 8,
-		"_title": "tierra",
-		"_price": 250,
-		"_url": "www.ElMonza.com"
+		"_url": "www.elMorza.com",
+		"_id": "b77b4c29-41c3-4b64-b176-6ee0c27a405e"
 	}
 ]

@@ -1,11 +1,14 @@
 import Producto from "../model/Product"
 
-class Contenedor {
+class ProductService {
     fileName: string
     fs = require("fs")
+    createError = require('http-errors')
+    path = require('path')
+    dbPath = this.path.resolve(__dirname, '../db/Database')
 
-    constructor(fileName:string) {
-        this.fileName = `${fileName}.json`
+    constructor() {
+        this.fileName = `${this.dbPath}.json`
         if(!this.fs.existsSync(this.fileName)){
             this.fs.writeFileSync(this.fileName,'[]')
         }
@@ -14,47 +17,42 @@ class Contenedor {
     async save(obj:Producto) {
             try {
                 let container = await this.getDatabase()
-                if(container.length > 0){
-                    let id = container[container.length - 1].id + 1
-                    obj.id = id
-                }
-                else {
-                    obj.id = 1
-                }
-
                 container.push(obj)
                 await this.saveProducts(container)
-                console.log(`Product with id: ${container[container.length-1].id} has been saved`)
+                
+                return obj
             } catch (error) {
-                console.log(error)
-                throw new Error('Error')
+                throw this.createError(400, 'Something went wrong with db')
             }
     }
 
-    async updateProduct(product:Producto, id:number) {
+    async updateProduct(product:Producto, id:string) {
         try {
             let objIndex = await this.objectExists(id)
-            if(objIndex < 0) return 'Object not found'
+            if(objIndex < 0) throw Error
     
             let container = await this.getDatabase()
             container[objIndex] = product
+            container[objIndex]._id = id
+
             await this.saveProducts(container)
             return `Object with id ${id} updated`
 
         } catch (error) {
-            console.log(error)
-            throw new Error('Error')
+            throw this.createError(404, 'El producto no existe')
         }
     }
 
-    async getById(id:number){
+    async getById(id:string){
         try {
             let container = await this.getDatabase()
             let objectFound = await this.objectExists(id)
-            return (objectFound < 0) ? 'Id not found' : container[objectFound]
+
+            if(objectFound < 0) throw Error
+
+            return container[objectFound]
         } catch (error) {
-            console.log(error)
-            throw new Error('Error')
+            throw this.createError(404, 'Producto no existe')
         }
     }
 
@@ -63,25 +61,20 @@ class Contenedor {
             let container = await this.getDatabase()
             return container
         } catch (error) {
-            console.log(error)
-            throw new Error('Error')
+            throw this.createError(400, 'Something went wrong with db')
         }
     }
 
-    async deleteById(id:number){
+    async deleteById(id:string){
         try {
             let objectIndex = await this.objectExists(id)
-            if(objectIndex < 0) { 
-                return 'Id not found'
-            }
+            if(objectIndex < 0) throw Error
+
             let container = await this.getDatabase()
             container.splice(objectIndex,1)
             await this.saveProducts(container)
-            console.log(`Object with id: ${id}, has been deleted`)
-
         } catch (error) {
-            console.log(error)
-            throw new Error('Error')
+            throw this.createError(404, 'El producto no existe')
         }
     }
 
@@ -90,14 +83,13 @@ class Contenedor {
             await this.saveProducts([])
             console.log('All objects had been removed');
         } catch (error) {
-            console.log(error)
-            throw new Error('Error')
+            throw this.createError(400, 'Something went wrong with db')
         }
     }
 
-    private async objectExists(id:number){
+    private async objectExists(id:string){
         let container = await this.getDatabase()
-        let objIndex = container.findIndex((obj:any) => obj.id === id)
+        let objIndex = container.findIndex((obj:any) => obj._id === id)
 
         return objIndex 
     }
@@ -113,8 +105,7 @@ class Contenedor {
             }
             return container
         } catch (error) {
-            console.log(error)
-            throw new Error("DB error")      
+            throw this.createError(400, 'Something went wrong with db')    
         }
     }
 
@@ -123,4 +114,4 @@ class Contenedor {
     }
 }
 
-export default Contenedor
+export const ProductInstance = new ProductService()
