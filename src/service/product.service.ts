@@ -81,7 +81,6 @@ class ProductService {
     async deleteAll(){
         try {
             await this.saveProducts([])
-            console.log('All objects had been removed');
         } catch (error) {
             throw this.createError(400, 'Something went wrong with db')
         }
