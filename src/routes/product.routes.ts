@@ -30,10 +30,10 @@ productsRoute.post('/',productValidation,asyncHandler(async(req:any,res:any,next
         })
 }))
 
-productsRoute.put('/:id',productValidation,asyncHandler(async(req:any,res:any,next:any) => {
-    let {title, price, url} = req.body
+productsRoute.put('/:id',asyncHandler(async(req:any,res:any,next:any) => {
+    let data = req.body
     return res.status(201).json({
-        data: await ProductService.updateProduct(new Producto(title,price,url),req.params.id)
+        data: await ProductService.updateProduct(data,req.params.id)
     })
 }))
 

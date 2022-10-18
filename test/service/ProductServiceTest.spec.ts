@@ -28,9 +28,18 @@ describe('Product Service Test', () => {
             expect(result._title).toBe(expected)
          })
 
-         test('getById(5) resolves in error', async () => { 
-            await expect(productService.getById("5")).rejects.toThrow(Error)
-         }) 
+        test('updateProduct(testId) title returns cerveza', async () => { 
+        const expected = 'cerveza'
+        const obj = {"title":"cerveza"}
+        await productService.updateProduct(obj,testId)
+        const result = await productService.getById(testId)
+        expect(result._title).toBe(expected)
+        expect(result._price).toBe(200)
+        })
+
+        test('getById(5) resolves in error', async () => { 
+        await expect(productService.getById("5")).rejects.toThrow(Error)
+        }) 
 
         test('deleteAll() deletes Db and getAll().lenght = 0', async () => { 
             await productService.deleteAll()

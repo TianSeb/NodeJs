@@ -26,13 +26,17 @@ class ProductService {
             }
     }
 
-    async updateProduct(product:Producto, id:string) {
+    async updateProduct(product:any, id:string) {
         try {
-            let objIndex = await this.objectExists(id)
+            let objIndex = await this.objectExists(id)  
             if(objIndex < 0) throw Error
-    
+
             let container = await this.getDatabase()
-            container[objIndex] = product
+            let dbProduct  = container[objIndex]
+
+            container[objIndex]._title = product.title|| dbProduct._title
+            container[objIndex]._price = parseInt(product.price) || dbProduct._price
+            container[objIndex]._url = product.url || dbProduct._url
             container[objIndex]._id = id
 
             await this.saveProducts(container)
