@@ -34,10 +34,10 @@ class ProductService {
             let container = await this.getDatabase()
             let dbProduct  = container[objIndex]
 
-            container[objIndex]._title = product.title|| dbProduct._title
-            container[objIndex]._price = parseInt(product.price) || dbProduct._price
-            container[objIndex]._url = product.url || dbProduct._url
-            container[objIndex]._id = id
+            dbProduct._title = product.title || dbProduct._title
+            dbProduct._price = parseInt(product.price) || dbProduct._price
+            dbProduct._url = product.url || dbProduct._url
+            dbProduct._id = id
 
             await this.saveProducts(container)
             return `Object with id ${id} updated`

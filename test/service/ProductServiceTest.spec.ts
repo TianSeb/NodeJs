@@ -6,9 +6,9 @@ let testId = ""
 
 beforeEach(async () => {
     await productService.deleteAll()
-    await productService.save(new Producto('mayonesa',200,'ww.com'))
-    await productService.save(new Producto('mostaza',400,'ww.com'))
-    await productService.save(new Producto('kechu',500,'ww.com'))
+    await productService.save(new Producto('mayonesa',200,'https://www.iconfinder.com/icons/3392469/chicken_food_fries_thigh_icon'))
+    await productService.save(new Producto('mostaza',400,'https://www.iconfinder.com/icons/3392483/beverages_drink_juice_orange_icon'))
+    await productService.save(new Producto('kechu',500,'https://www.iconfinder.com/icons/3392472/food_sussage_hot%20dog_icon'))
     container = await productService.getAll()
     testId = container[0]._id
 })
