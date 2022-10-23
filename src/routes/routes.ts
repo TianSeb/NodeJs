@@ -6,13 +6,14 @@ const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const routes = Router()
 
+routes.use('/api/productos',productsRoute)
+
+// Rutas clase 10 //
 const productValidation = (req:Request,res:Response,next:NextFunction) => {    
     let {title, price, url} = req.body
     if(!title || !price || !url || typeof title !== 'string') throw createError(400,'Datos invalidos');
     next()
 }
-
-routes.use('/api/productos',productsRoute)
 
 routes.get('/',(req:Request, res:Response) => {
     res.render('pages/index')
