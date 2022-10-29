@@ -1,12 +1,24 @@
-import { server } from "./server/server"
+import { app } from "./service/server"
+import { SocketService } from "./service/socket.service"
+import getDb from "./db/getDB"
 
-//-------------------------------------------- 
-// Server Init
 const PORT = 8080
-server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-})
+const socketServer = new SocketService(app)
 
-server.on('error', (err) => {
+//------------------------
+//Init socket Server
+socketServer.initWsServer()
+
+//------------------------
+//Init DB
+getDb()
+
+//------------------------
+//Server
+app.listen(PORT, () => {
+    console.log(`socketServer listening on port ${PORT}`);
+    })
+
+    app.on('error', (err:Error) => {
     console.log('ERROR =>', err);
-  });
+    })

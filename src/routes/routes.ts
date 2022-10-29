@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from "express"
 import { ProductInstance as productService } from "../service/product.service"
 import productsRoute from "./product.routes"
 import Producto from "../model/Product"
+
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const routes = Router()
@@ -17,6 +18,7 @@ const productValidation = (req:Request,res:Response,next:NextFunction) => {
 
 routes.get('/',(req:Request, res:Response) => {
     res.render('pages/index')
+
 })
 
 routes.get('/productos',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
