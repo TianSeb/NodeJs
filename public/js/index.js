@@ -4,9 +4,20 @@ const inputUserName = document.getElementById('inputUserName')
 const inputMensaje = document.getElementById('inputMsg')
 const btnEnviar = document.getElementById('btnEnviar')
 const formPublicarMsg = document.getElementById('formPublicarMsg')
+const msgBox = document.getElementById('msgBox')
 
-socket.on('msgGuardado', msg => {
-    console.log(msg)
+
+socket.emit('askData')
+
+socket.on('productos', productos => {
+    makeHtmlTable(productos).then(html => {
+        document.getElementById('productos').innerHTML = html
+    })
+})
+
+socket.on('mensajes', data => {
+    outputMsgs(data)
+    msgBox.scrollTop = msgBox.scrollHeight
 })
 
 formPublicarMsg.addEventListener('submit', e => {
@@ -31,36 +42,23 @@ inputMensaje.addEventListener('input', () => {
 })
 
 
+function outputMsgs(mensajes) {
+    mensajes.map(msg => {
+        const div = document.createElement('div')
+        div.classList.add('message')
+        div.innerHTML = `
+        <p class="meta">${msg.userEmail}</p>
+        <p class="text"> <span> ${msg.date} : </span> ${msg.msg} </p>`
+        msgBox.appendChild(div)
+    })
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// socket.emit('askData')
-
-// socket.on('productos', productos => {
-//     makeHtmlTable(productos).then(html => {
-//         document.getElementById('productos').innerHTML = html
-//     })
-// });
-
-// function makeHtmlTable(productos) {
-//     return fetch('views/productHistory.ejs')
-//         .then(respuesta => respuesta.text())
-//         .then(plantilla => {
-//             const template = ejs.compile(plantilla);
-//             const html = template({ productos })
-//             return html
-//         })
-// }
+function makeHtmlTable(productos) {
+    return fetch('views/productHistory.ejs')
+        .then(respuesta => respuesta.text())
+        .then(plantilla => {
+            const template = ejs.compile(plantilla);
+            const html = template({ productos })
+            return html
+        })
+}

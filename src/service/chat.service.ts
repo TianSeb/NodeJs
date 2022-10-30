@@ -1,10 +1,11 @@
 class ChatService {
     createError = require('http-errors')
+    moment = require('moment')
 
     constructor(private chat:any = [], private id:number = 0){}
 
     saveMsg(data:any) {
-        const chatMsg = { ...data, id: ++this.id}
+        const chatMsg = { ...data, id: ++this.id, date: this.moment().format('DD/MM/YYYY HH:MM:SS')}
         this.chat.push(chatMsg)
        
         return chatMsg
