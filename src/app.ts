@@ -1,13 +1,12 @@
 import { app } from "./service/server"
-import { SocketService } from "./service/socket.service"
+import { initWsServer } from "./service/socket.service"
 import getDb from "./db/getDB"
 
 const PORT = 8080
-const socketServer = new SocketService(app)
 
 //------------------------
 //Init socket Server
-socketServer.initWsServer()
+initWsServer(app)
 
 //------------------------
 //Init DB

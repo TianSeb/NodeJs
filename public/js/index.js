@@ -6,14 +6,21 @@ const btnEnviar = document.getElementById('btnEnviar')
 const formPublicarMsg = document.getElementById('formPublicarMsg')
 const msgBox = document.getElementById('msgBox')
 
-
-socket.emit('askData')
-
 socket.on('productos', productos => {
     makeHtmlTable(productos).then(html => {
         document.getElementById('productos').innerHTML = html
     })
 })
+
+function makeHtmlTable(productos) {
+    return fetch('views/productHistory.ejs')
+        .then(respuesta => respuesta.text())
+        .then(plantilla => {
+            const template = ejs.compile(plantilla);
+            const html = template({ productos })
+            return html
+        })
+}
 
 socket.on('mensajes', data => {
     outputMsgs(data)
@@ -43,6 +50,7 @@ inputMensaje.addEventListener('input', () => {
 
 
 function outputMsgs(mensajes) {
+    msgBox.innerHTML = ''
     mensajes.map(msg => {
         const div = document.createElement('div')
         div.classList.add('message')
@@ -51,14 +59,4 @@ function outputMsgs(mensajes) {
         <p class="text"> <span> ${msg.date} : </span> ${msg.msg} </p>`
         msgBox.appendChild(div)
     })
-}
-
-function makeHtmlTable(productos) {
-    return fetch('views/productHistory.ejs')
-        .then(respuesta => respuesta.text())
-        .then(plantilla => {
-            const template = ejs.compile(plantilla);
-            const html = template({ productos })
-            return html
-        })
 }

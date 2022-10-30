@@ -1,18 +1,18 @@
-<form action="/productos/" method="post" class="form">
+<form action="/productos/" method="post" class="product-form">
   <h2>Ingresa los Datos</h2>
-    <div class="form-group w-50">
+    <div class="form-group">
       <label for="title"></label>
       <input type="text" class="form-control" id="title" placeholder="Nombre Producto" name="title" required>
     </div>
-    <div class="form-group w-50">
+    <div class="form-group">
       <label for="price"></label>
       <input type="number" class="form-control" id="price" placeholder="Precio" name="price" required>
     </div>
-    <div class="form-group w-50">
+    <div class="form-group">
       <label for="url"></label>
       <input type="text" class="form-control" id="url" placeholder="URL" name="url" required>
     </div>
-    <div class="container justify-content-center">
+    <div class="container">
       <button type="submit" class="btn btn-primary mt-3">Submit</button>
       <button onclick="window.location.href='/productos'" class="btn btn-primary mt-3">Productos</button>
     </div>

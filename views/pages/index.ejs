@@ -4,12 +4,20 @@
     <%- include('../partials/header.ejs') %> 
  </head>
 <body>
-    <div class="container-fluid">
-        <%- include('../partials/form.ejs') %> 
-    </div>
-    <div id="productos" class="container" style="margin-left:29%;"></div>
-    <div class="container-fluid w-50">
-        <%- include('../partials/chat.ejs') %> 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6" style="border: lightblue solid;">
+                <div class="container-fluid">
+                    <%- include('../partials/form.ejs') %> 
+                </div>
+                <div class="container-fluid" id="productos"></div>
+            </div>
+            <div class="col-md-6" style="border: lightblue solid;">
+                <div class="container-fluid">
+                    <%- include('../partials/chat.ejs') %> 
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="js/index.js"></script>

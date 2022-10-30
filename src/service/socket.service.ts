@@ -2,40 +2,34 @@ import { Server, Socket } from "socket.io"
 import { ProductInstance as productService } from "./product.service"
 import { ChatService } from "./chat.service"
 
-class SocketService {
+let io : any
+const chatService = new ChatService()
 
-    chatService : ChatService = new ChatService()
-    io : Server
-    constructor(server:any){
-        this.io = new Server(server)
-    }
-
-    async initWsServer () {
-        this.io.on('connection',async (socket:Socket) => {
+const initWsServer = (server:any) => {
+    io = new Server(server)
+        io.on('connection',async (socket:Socket) => {
             console.log('Nuevo cliente conectado')
             
-            socket.emit('mensajes', this.chatService.getAllMsgs())
+            socket.emit('mensajes', chatService.getAllMsgs())
 
-            socket.on('msgEnviado', async data => { 
-                const {userEmail, msg} = data //toDo validar datos
-                this.chatService.saveMsg(data)
-                this.io.sockets.emit('mensajes', this.chatService.getAllMsgs())
+            socket.on('msgEnviado', data => {       
+                chatService.saveMsg(data)          
+                io.sockets.emit('mensajes', chatService.getAllMsgs())
             })
 
             // carga inicial de productos
-            this.io.emit('productos', await productService.getAll());
-    
+            io.emit('productos', await productService.getAll());
+
             // actualizacion de productos
             socket.on('update', async producto => {
                 await productService.save(producto)
-                this.io.sockets.emit('productos', productService.getAll())
-            })
+                io.sockets.emit('productos', productService.getAll())
         })
-    }
-    
-    async getWsServer () {
-        return this.io
-    }
+    })
 }
 
-export { SocketService }
+const getWsServer = () => {
+    return io
+}
+
+export { initWsServer, getWsServer }
