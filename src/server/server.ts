@@ -1,7 +1,7 @@
 import express from 'express'
 import { createServer } from "http"
 import { lastErrorCatch } from '../utils/errors'
-import routes from '../routes/routes'
+import routes from '../routes/view.routes'
 
 //--------------------------------------------
 //api initialization
