@@ -1,38 +1,3 @@
 [
-	{
-		"_title": "mayonesa",
-		"_price": 200,
-		"_url": "https://cdn3.iconfinder.com/data/icons/food-and-beverages-7/64/03_chicken_fries_thigh_food-512.png",
-		"_id": "e64ac424-058a-4af7-b3c7-7f28ab014128"
-	},
-	{
-		"_title": "mostaza",
-		"_price": 400,
-		"_url": "https://cdn3.iconfinder.com/data/icons/food-and-beverages-7/64/09_juice_drink_beverages_orange-512.png",
-		"_id": "1ac68ed4-d3b6-4d2e-998e-68c60be1310a"
-	},
-	{
-		"_title": "kechu",
-		"_price": 500,
-		"_url": "https://cdn3.iconfinder.com/data/icons/food-and-beverages-7/64/20_hot_dog_sussage_food-512.png",
-		"_id": "a9d6b52f-a769-4103-9b7e-0d6404dcabd3"
-	},
-	{
-		"_title": "a",
-		"_price": "2",
-		"_url": "a",
-		"_id": "f584fe89-188c-4566-8e8a-9e41074d1385"
-	},
-	{
-		"_title": "a",
-		"_price": "2",
-		"_url": "a",
-		"_id": "eefc6018-fac4-443b-a167-4a405d21c14f"
-	},
-	{
-		"_title": "sdfsfdsfds",
-		"_price": "3",
-		"_url": "sdfsdfds",
-		"_id": "845bfac9-b955-4aa4-96d8-a660d0eb5e5a"
-	}
+
 ]

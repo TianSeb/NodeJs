@@ -5,6 +5,8 @@ const inputMensaje = document.getElementById('inputMsg')
 const btnEnviar = document.getElementById('btnEnviar')
 const formPublicarMsg = document.getElementById('formPublicarMsg')
 const msgBox = document.getElementById('msgBox')
+const formPostProducto = document.getElementById('productForm')
+
 
 socket.on('productos', productos => {
     makeHtmlTable(productos).then(html => {

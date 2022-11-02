@@ -1,4 +1,4 @@
-import { app } from "./service/server"
+import { app } from "./server/server"
 import { initWsServer } from "./service/socket.service"
 import getDb from "./db/getDB"
 

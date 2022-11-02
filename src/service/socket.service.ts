@@ -18,7 +18,8 @@ const initWsServer = (server:any) => {
             })
 
             // carga inicial de productos
-            io.emit('productos', await productService.getAll());
+            io.emit('productos', 
+            await productService.getAll());
 
             // actualizacion de productos
             socket.on('update', async producto => {
