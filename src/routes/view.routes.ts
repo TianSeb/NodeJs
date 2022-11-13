@@ -1,15 +1,14 @@
 import { Router, Request, Response, NextFunction } from "express"
-import { ProductInstance as productService } from "../service/product.service"
+import ProductService from "../service/product.service"
 import productsRoute from "./product.routes"
-import Producto from "../model/Product"
 
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const routes = Router()
+const productService = new ProductService()
 
 routes.use('/api/productos',productsRoute)
 
-// Rutas clase 10 //
 const productValidation = (req:Request,res:Response,next:NextFunction) => {    
     let {title, price, url} = req.body
     if(!title || !price || !url || typeof title !== 'string') throw createError(400,'Datos invalidos');
@@ -21,13 +20,13 @@ routes.get('/', (req:Request, res:Response) => {
 })
 
 routes.get('/productos', asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
-    const productos = await productService.getAll()
+    const productos = await productService.get("")
+    console.log(productos)
     res.render('pages/products',{productos})
 }))
 
 routes.post('/productos',productValidation, asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
-    let {title, price, url} = req.body
-    await productService.save(new Producto(title,price,url))
+    await productService.create(req.body)
     res.redirect(302,'/')
 }))
 

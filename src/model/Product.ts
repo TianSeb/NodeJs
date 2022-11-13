@@ -1,22 +1,26 @@
 import { v4 as uuidv4 } from 'uuid'
 class Producto {
-    private _id:string
-    constructor(private _title: string, 
-        private _price:number, private _url:string) {
-            this._id = uuidv4()
-        }
+    private id:string
+    constructor(private title: string, 
+                    private price:number, private url:string) {
+            this.id = uuidv4()
+    }
 
-        public get title(): string {
-            return this._title
-        }
+    public get getTitle(): string {
+        return this.title
+    }
 
-        public get price(): number {
-            return this._price
-        }
+    public get getPrice(): number {
+        return this.price
+    }
 
-        public get url(): string {
-            return this._url
-        }
+    public get getUrl(): string {
+        return this.url
+    }
+
+    public get getId(): string {
+        return this.id
+    }
 }
 
 export default Producto
