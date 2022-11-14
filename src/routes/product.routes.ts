@@ -11,7 +11,7 @@ const productValidation = (req:Request,res:Response,next:NextFunction) => {
     next()
 }
 
-productsRoute.get('/:id',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+productsRoute.get('/:id?',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
         return res.json({
             data: await productService.get(req.params.id)   
         })
@@ -32,6 +32,12 @@ productsRoute.put('/:id',asyncHandler(async(req:Request,res:Response,next:NextFu
 productsRoute.delete('/:id',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
     return res.json({
         msg: await productService.deleteById(req.params.id)
+    })
+}))
+
+productsRoute.delete('/',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+    return res.json({
+        msg: await productService.deleteAll()
     })
 }))
 

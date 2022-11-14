@@ -24,15 +24,15 @@ export class SocketSevice {
     private eventHandler() : void {
         this.io.on('connection', async (socket:socketType) => {
             console.log('Nuevo cliente conectado')
-            socket.emit('mensajes', this.chatService.getAllMsgs())
+            socket.emit('mensajes', await this.chatService.getAllMsgs())
 
-            socket.on('msgEnviado', (data:string):void => {       
-                this.chatService.saveMsg(data)          
-                this.io.sockets.emit('mensajes', this.chatService.getAllMsgs())
+            socket.on('msgEnviado', async (data:string):Promise<void> => {       
+                this.chatService.saveMsg(data)
+                this.io.sockets.emit('mensajes',await this.chatService.getAllMsgs())
             })
 
             // carga inicial de productos
-            this.io.emit('productos', 
+            socket.emit('productos',
             await this.productService.get());
 
             // actualizacion de productos

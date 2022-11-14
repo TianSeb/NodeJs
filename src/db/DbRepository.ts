@@ -1,19 +1,17 @@
 import knex from "knex";
 import dbConfig from './knexfile'
 
-class Database {
+class DbRepository {
 
     connection:any
     tableName:string
     
-    constructor(config:any, tableName:string) {
+    constructor(tableName:string) {
         const environment = 'development'
         console.log(`INITIALIZING ${environment} DB`)
-        // const options:= config[environment]
-        this.connection = knex(config)
-        this.tableName = tableName
-        console.log('termine de crear las cosas del constructor db');
-        
+        const options = dbConfig[environment]
+        this.connection = knex(options)
+        this.tableName = tableName        
     }
 
     create(data:any) {
@@ -25,7 +23,6 @@ class Database {
     }
 
     get(id?:string){
-        console.log('estoy en el get de la db')
         return (id) ? this.connection(this.tableName).where('id',id)
                             : this.connection(this.tableName)
     }
@@ -36,10 +33,5 @@ class Database {
     }
 }
 
-const prodDatabase = new Database(dbConfig.development,'productos')
-const chatDatabase = new Database(dbConfig.development,'chat')
-
-module.exports = {
-    prodDatabase,
-    chatDatabase
-}
+export const prodDatabase = new DbRepository('productos')
+export const chatDatabase = new DbRepository('chat')

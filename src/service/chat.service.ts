@@ -1,4 +1,4 @@
-const database = require("../db/Database")
+import { chatDatabase } from "../db/DbRepository"
 
 class ChatService {
     createError = require('http-errors')
@@ -6,7 +6,7 @@ class ChatService {
     chatRepository:any
 
     constructor(){
-        this.chatRepository = database.chatDatabase
+        this.chatRepository = chatDatabase
     }
 
     async saveMsg(data:any) : Promise<Message | Error> {
@@ -21,7 +21,6 @@ class ChatService {
     }
 
     async getAllMsgs() : Promise<Message[] | Error> {
-        console.log('estoy aca en get allmsgs')
         return await this.chatRepository.get()
     }
 

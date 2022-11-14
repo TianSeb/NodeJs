@@ -20,8 +20,7 @@ routes.get('/', (req:Request, res:Response) => {
 })
 
 routes.get('/productos', asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
-    const productos = await productService.get("")
-    console.log(productos)
+    const productos = await productService.get()
     res.render('pages/products',{productos})
 }))
 

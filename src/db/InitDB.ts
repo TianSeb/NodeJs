@@ -28,7 +28,7 @@ const db = knex(dbConfig.development)
 
 const initProductosTable = async() => {
     await db.schema.createTable(PRODUCTOS_TABLE, (table) => {
-        table.uuid('id')
+        table.string('id')
         table.string('title').notNullable()
         table.integer('price',3).notNullable()
         table.string('url')
