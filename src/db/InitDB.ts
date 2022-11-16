@@ -45,8 +45,8 @@ const initChatTable = async () => {
     })
 
     await db(CHAT_TABLE).insert({
-        userEmail: "pepe@argento.com",
-        msg: "anda a lavartelos",
+        userEmail: "jorge@burrito.com",
+        msg: "primeramente quisiera saludar...",
         date: "12/12/2022"
     })
 

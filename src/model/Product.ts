@@ -6,19 +6,19 @@ class Producto {
             this.id = uuidv4()
     }
 
-    public get getTitle(): string {
+    get getTitle(): string {
         return this.title
     }
 
-    public get getPrice(): number {
+    get getPrice(): number {
         return this.price
     }
 
-    public get getUrl(): string {
+    get getUrl(): string {
         return this.url
     }
 
-    public get getId(): string {
+    get getId(): string {
         return this.id
     }
 }

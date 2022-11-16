@@ -31,7 +31,7 @@ socket.on('mensajes', data => {
 
 formPublicarMsg.addEventListener('submit', e => {
     e.preventDefault()
-
+    console.log('msg enviado')
     const data = {userEmail: inputUserName.value , msg: inputMensaje.value}
     socket.emit('msgEnviado', data)
     formPublicarMsg.reset()

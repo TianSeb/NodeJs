@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "dev": "ts-node-dev src/app.ts",
-    "start": "node build/app.ts",
+    "start": "node build/app.js",
     "tsc": "tsc",
     "test": "jest"
   },
@@ -14,8 +14,8 @@
     "url": "git+https://github.com/TianSeb/NodeJs.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "TianSeb",
+  "license": "Mayéutica",
   "bugs": {
     "url": "https://github.com/TianSeb/NodeJs.git/issues"
   },
@@ -23,9 +23,11 @@
   "devDependencies": {
     "@types/express": "4.17.14",
     "@types/jest": "^29.0.3",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^18.11.9",
     "@types/uuid": "^8.3.4",
     "jest": "^29.0.3",
+    "morgan": "^1.10.0",
     "supertest": "^6.3.0",
     "ts-jest": "^29.0.1",
     "ts-node-dev": "^2.0.0",

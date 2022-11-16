@@ -1,11 +1,11 @@
 import { app } from "./server/server"
-import { SocketSevice } from "./service/socket.service"
-import { initDb } from './db/InitDB'
+import { SocketService } from "./service/socket.service"
+import { initDb } from "./db/InitDB"
 
 const PORT = 8080
 
 const init = async () => {
-    const socketService = new SocketSevice(app)
+    const socketService = new SocketService(app)
     await initDb()
     app.listen(PORT, () => {
         console.log(`socketServer listening on port ${PORT}`);

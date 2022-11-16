@@ -1,8 +1,8 @@
 import { chatDatabase } from "../db/DbRepository"
+import moment from "moment"
 
 class ChatService {
     createError = require('http-errors')
-    moment = require('moment')
     chatRepository:any
 
     constructor(){
@@ -14,7 +14,7 @@ class ChatService {
         const chatMsg : Message = {
                             userEmail, 
                             msg,
-                            date: this.moment().format('DD/MM/YYYY HH:MM:SS')
+                            date: moment().format('DD/MM/YYYY HH:MM:SS')
                         }
 
         return await this.chatRepository.create(chatMsg)

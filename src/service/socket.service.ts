@@ -4,7 +4,7 @@ import { Server as httpServer } from 'http'
 import ProductService from './product.service'
 import ChatService from './chat.service'
 
-export class SocketSevice {
+export class SocketService {
    
     private io: ioServer
     private chatService: ChatService
@@ -27,7 +27,7 @@ export class SocketSevice {
             socket.emit('mensajes', await this.chatService.getAllMsgs())
 
             socket.on('msgEnviado', async (data:string):Promise<void> => {       
-                this.chatService.saveMsg(data)
+                await this.chatService.saveMsg(data)
                 this.io.sockets.emit('mensajes',await this.chatService.getAllMsgs())
             })
 
