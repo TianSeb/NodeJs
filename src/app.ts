@@ -1,22 +1,19 @@
 import { app } from "./server/server"
-import { SocketSevice } from "./service/socket.service"
-import getDb from "./db/getDB"
+import { SocketService } from "./service/socket.service"
+import { initDb } from "./db/InitDB"
 
 const PORT = 8080
-//------------------------
-//Init socket Server
-const socketService = new SocketSevice(app)
 
-//------------------------
-//Init DB
-getDb()
+const init = async () => {
+    const socketService = new SocketService(app)
+    await initDb()
+    app.listen(PORT, () => {
+        console.log(`socketServer listening on port ${PORT}`);
+        })
 
-//------------------------
-//Server
-app.listen(PORT, () => {
-    console.log(`socketServer listening on port ${PORT}`);
-    })
+        app.on('error', (err:Error) => {
+        console.log('ERROR =>', err);
+        })    
+}
 
-    app.on('error', (err:Error) => {
-    console.log('ERROR =>', err);
-    })
+init()

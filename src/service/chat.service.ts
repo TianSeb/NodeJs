@@ -1,35 +1,38 @@
-type Message = {
-    userEmail: string,
-    msg: string,
-    id: number,
-    date: string
-}
+import { chatDatabase } from "../db/DbRepository"
+import moment from "moment"
+
 class ChatService {
     createError = require('http-errors')
-    moment = require('moment')
+    chatRepository:any
 
-    constructor(private chat:Message[] = [], private id:number = 0){}
+    constructor(){
+        this.chatRepository = chatDatabase
+    }
 
-    saveMsg(data:any) : Message {
+    async saveMsg(data:any) : Promise<Message | Error> {
         let {userEmail, msg} = data
         const chatMsg : Message = {
                             userEmail, 
-                            msg, 
-                            id: ++this.id, 
-                            date: this.moment().format('DD/MM/YYYY HH:MM:SS')
+                            msg,
+                            date: moment().format('DD/MM/YYYY HH:MM:SS')
                         }
-        this.chat.push(chatMsg)
-       
-        return chatMsg
+
+        return await this.chatRepository.create(chatMsg)
     }
 
-    getAllMsgs() : Message[] {
-        return this.chat
+    async getAllMsgs() : Promise<Message[] | Error> {
+        return await this.chatRepository.get()
     }
 
-    deleteAllMsgs() : void {
-        this.chat = []
+    async deleteAllMsgs() : Promise<void> {
+        await this.chatRepository.delete()
     }
 }
 
-export { ChatService }
+type Message = {
+    userEmail: string,
+    msg: string,
+    date: string
+}
+
+export default ChatService

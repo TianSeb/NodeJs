@@ -1,9 +1,9 @@
 import { Router, Request, Response, NextFunction } from "express"
-import Producto from "../model/Product"
-import { ProductInstance as ProductService } from "../service/product.service"
+import ProductService from "../service/product.service"
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const productsRoute = Router()
+const productService = new ProductService()
 
 const productValidation = (req:Request,res:Response,next:NextFunction) => {    
     let {title, price, url} = req.body
@@ -11,35 +11,33 @@ const productValidation = (req:Request,res:Response,next:NextFunction) => {
     next()
 }
 
-productsRoute.get('/',asyncHandler(async (req:Request,res:Response,next:NextFunction) => {
-    return res.json({
-        data: await ProductService.getAll()
-    })
-}))
-
-productsRoute.get('/:id',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+productsRoute.get('/:id?',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
         return res.json({
-            data: await ProductService.getById(req.params.id)   
+            data: await productService.get(req.params.id)   
         })
 }))
 
 productsRoute.post('/',productValidation,asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
-        let {title, price, url} = req.body
-        return res.status(201).json({
-            data: await ProductService.save(new Producto(title,parseInt(price),url))
+        return res.json({
+            data: await productService.create(req.body)
         })
 }))
 
 productsRoute.put('/:id',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
-    let data = req.body
-    return res.status(201).json({
-        data: await ProductService.updateProduct(data,req.params.id)
+    return res.json({
+        data: await productService.update(req.body,req.params.id)
     })
 }))
 
 productsRoute.delete('/:id',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
     return res.json({
-        msg: await ProductService.deleteById(req.params.id)
+        msg: await productService.deleteById(req.params.id)
+    })
+}))
+
+productsRoute.delete('/',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+    return res.json({
+        msg: await productService.deleteAll()
     })
 }))
 
