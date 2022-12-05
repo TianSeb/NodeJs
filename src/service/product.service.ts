@@ -1,5 +1,5 @@
 import Producto from "../model/Product"
-import { prodDatabase } from "../db/DbRepository"
+import { prodDatabase } from "../repository/RelationalDB"
 
 class ProductService {
     createError = require('http-errors')

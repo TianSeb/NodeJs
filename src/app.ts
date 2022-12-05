@@ -1,6 +1,6 @@
 import { app } from "./server/server"
 import { SocketService } from "./service/socket.service"
-import { initDb } from "./db/InitDB"
+import { initDb } from "./db/InitSQL"
 
 const PORT = 8080
 

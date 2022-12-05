@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express"
-import ProductService from "../service/product.service"
+import ProductService from "../../service/product.service"
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const productsRoute = Router()

@@ -1,4 +1,4 @@
-import { chatDatabase } from "../db/DbRepository"
+import { chatDatabase } from "../repository/RelationalDB"
 import moment from "moment"
 
 class ChatService {

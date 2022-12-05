@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express"
-import ProductService from "../service/product.service"
+import ProductService from "../../service/product.service"
 import productsRoute from "./product.routes"
+import fakerRoutes from "./faker.routes"
 
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
@@ -8,6 +9,7 @@ const routes = Router()
 const productService = new ProductService()
 
 routes.use('/api/productos',productsRoute)
+routes.use('/api/productos-test',fakerRoutes)
 
 const productValidation = (req:Request,res:Response,next:NextFunction) => {    
     let {title, price, url} = req.body

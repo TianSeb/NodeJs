@@ -1,8 +1,8 @@
 import express from 'express'
 import morgan from 'morgan'
 import { createServer } from "http"
-import { lastErrorCatch } from '../utils/errors'
-import routes from '../routes/view.routes'
+import { lastErrorCatch } from '../utils/Utils'
+import routes from '../controller/routes/view.routes'
 
 //--------------------------------------------
 //api initialization

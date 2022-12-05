@@ -1,7 +1,7 @@
 import knex from "knex";
-import dbConfig from './knexfile'
+import dbConfig from '../db/knexfile'
 
-class DbRepository {
+export class RelationalDB {
 
     connection:any
     tableName:string
@@ -33,5 +33,5 @@ class DbRepository {
     }
 }
 
-export const prodDatabase = new DbRepository('productos')
-export const chatDatabase = new DbRepository('chat')
+export const prodDatabase = new RelationalDB('productos')
+export const chatDatabase = new RelationalDB('chat')
