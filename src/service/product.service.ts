@@ -1,4 +1,4 @@
-import Producto from "../model/Product"
+import Producto from "../model/product/Product"
 import { prodDatabase } from "../repository/RelationalDB"
 
 class ProductService {

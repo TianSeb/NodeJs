@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
-class Producto {
+
+export default class Producto {
     private id:string
     constructor(private title: string, 
                     private price:number, private url:string) {
@@ -22,5 +23,3 @@ class Producto {
         return this.id
     }
 }
-
-export default Producto

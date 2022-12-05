@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import Producto from '../model/Product'
+import Producto from '../model/product/Product'
 import { faker } from '@faker-js/faker';
 
 const lastErrorCatch = ((err:any, req:Request,res:Response,next:NextFunction) => {
