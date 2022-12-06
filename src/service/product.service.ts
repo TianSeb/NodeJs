@@ -37,7 +37,7 @@ class ProductService {
             return (id) ? await this.productoRepository.get(id)
                             : await this.productoRepository.get()
         } catch (error) {
-            throw this.createError(404, 'Producto no existe')
+            return this.createError(404, 'Producto no existe')
         }
     }
 
@@ -62,4 +62,4 @@ class ProductService {
 
 }
 
-export default ProductService
+export const productService = new ProductService()

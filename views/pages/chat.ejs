@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <%- include('../partials/header.ejs') %> 
+ </head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6" style="border: lightblue solid;">
+                <div class="container-fluid">
+                    <%- include('../partials/form.ejs') %> 
+                </div>
+            <div class="container-fluid" id="productos"></div>
+            <div class="container-fluid" style="border: lightblue solid;">
+                <%- include('../partials/chat.ejs') %> 
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/index.js"></script>
+</html>

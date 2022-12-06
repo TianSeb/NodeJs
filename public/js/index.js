@@ -1,6 +1,6 @@
 const socket = io().connect('http://localhost:8080', { forceNew: true })
 
-const inputUserName = document.getElementById('inputUserName')
+const inputUserEmail = document.getElementById('inputUserName')
 const inputMensaje = document.getElementById('inputMsg')
 const btnEnviar = document.getElementById('btnEnviar')
 const formPublicarMsg = document.getElementById('formPublicarMsg')
@@ -32,14 +32,14 @@ socket.on('mensajes', data => {
 formPublicarMsg.addEventListener('submit', e => {
     e.preventDefault()
     console.log('msg enviado')
-    const data = {userEmail: inputUserName.value , msg: inputMensaje.value}
+    const data = {userEmail: inputUserEmail.value , msg: inputMensaje.value}
     socket.emit('msgEnviado', data)
     formPublicarMsg.reset()
     inputMensaje.focus()
 })
 
-inputUserName.addEventListener('input', () => {
-    const emailTrue = inputUserName.value.length
+inputUserEmail.addEventListener('input', () => {
+    const emailTrue = inputUserEmail.value.length
     const msgTrue = inputMensaje.value.length
     inputMensaje.disabled = !emailTrue
     btnEnviar.disabled = !emailTrue || !msgTrue

@@ -1,20 +1,19 @@
 import { Server as ioServer } from "socket.io"
 import { Socket as socketType } from 'socket.io'
 import { Server as httpServer } from 'http'
-import ProductService from './product.service'
-import ChatService from './chat.service'
-
+import { productService } from "./product.service"
+import { chatService } from "./chat.service"
 export class SocketService {
    
     private io: ioServer
-    private chatService: ChatService
-    private productService: ProductService
+    private chatService: any
+    private productService: any
     
     constructor(app: httpServer) {
         this.initWsServer(app)
         this.eventHandler()
-        this.chatService = new ChatService()
-        this.productService = new ProductService()
+        this.chatService = chatService
+        this.productService = productService
     }
 
     private initWsServer(app: httpServer): void {
@@ -24,11 +23,11 @@ export class SocketService {
     private eventHandler() : void {
         this.io.on('connection', async (socket:socketType) => {
             console.log('Nuevo cliente conectado')
-            socket.emit('mensajes', await this.chatService.getAllMsgs())
+            socket.emit('mensajes', await this.chatService.chatMsgs())
 
             socket.on('msgEnviado', async (data:string):Promise<void> => {       
                 await this.chatService.saveMsg(data)
-                this.io.sockets.emit('mensajes',await this.chatService.getAllMsgs())
+                this.io.sockets.emit('mensajes',await this.chatService.chatMsgs())
             })
 
             // carga inicial de productos

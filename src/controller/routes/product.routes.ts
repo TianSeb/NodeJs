@@ -1,9 +1,8 @@
 import { Router, Request, Response, NextFunction } from "express"
-import ProductService from "../../service/product.service"
+import { productService } from "../../service/product.service"
 const asyncHandler = require('express-async-handler')
 const createError = require('http-errors')
 const productsRoute = Router()
-const productService = new ProductService()
 
 const productValidation = (req:Request,res:Response,next:NextFunction) => {    
     let {title, price, url} = req.body
