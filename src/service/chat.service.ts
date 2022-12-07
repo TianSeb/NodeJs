@@ -1,5 +1,3 @@
-import { chatDatabase } from "../repository/RelationalDB"
-import moment from "moment"
 import { ChatMessage } from "../model/msg/ChatMessage"
 import { chatMessageDAO } from "../model/msg/ChatMessageDAO"
 
@@ -12,11 +10,11 @@ class ChatService {
     }
 
     async saveMsg(data:any) : Promise<ChatMessage | Error> {
-        let {msg} = data
+        let {text} = data
         let {id,nombre,apellido,edad,alias,avatar} = data.author
 
         let author = new ChatMessage.Author(id,nombre,apellido,edad,alias,avatar)
-        let chatMsg = new ChatMessage(msg,author)
+        let chatMsg = new ChatMessage(text,author)
 
         console.log(chatMsg)
         return await this.chatRepository.create(chatMsg)

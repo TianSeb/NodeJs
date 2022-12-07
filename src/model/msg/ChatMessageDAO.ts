@@ -4,7 +4,7 @@ import { MongoRepository } from "../../repository/MongoRepository"
 const chatMessageCollection = 'chat'
 
 const chatSchema = new mongoose.Schema({
-        text: {type: String, required: true},
+        text: {type: String, required: true, max:500},
         author: {
             id: {type: String, required: true},
             nombre: {type: String, required: true},

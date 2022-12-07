@@ -16,4 +16,8 @@ msgRoute.get('/msg/:id?',asyncHandler(async(req:Request,res:Response,next:NextFu
     })
 }))
 
+msgRoute.get('/',asyncHandler(async(req:Request,res:Response,next:NextFunction) => {
+    res.render('pages/newchat')
+}))
+
 export default msgRoute
