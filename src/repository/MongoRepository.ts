@@ -10,7 +10,7 @@ export class MongoRepository {
 
     async get(id?:string){
         return (id) ? this.collection.findById(id)
-                            : this.collection.find()
+                            : this.collection.find().lean()
     }
 
     async create(data:any) {

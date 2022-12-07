@@ -1,6 +1,7 @@
 import { ChatMessage } from "../model/msg/ChatMessage"
 import { chatMessageDAO } from "../model/msg/ChatMessageDAO"
-
+import { normalizeData, denormalizeData } from "../utils/Normalizer"
+import { chatMsgSchema } from "../model/msg/ChatNormalizer"
 class ChatService {
     createError = require('http-errors')
     chatRepository:any
@@ -26,6 +27,15 @@ class ChatService {
 
     async deleteAllMsgs() : Promise<void> {
         await this.chatRepository.delete()
+    }
+
+    async normalize() : Promise<any> {
+        return await normalizeData(chatMessageDAO,chatMsgSchema)
+    }
+
+    async denormalize() : Promise<any> {
+        let data = await this.normalize()
+        return await denormalizeData(data, chatMsgSchema)
     }
 }
 
